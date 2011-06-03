@@ -5,12 +5,18 @@ animate-textshadow is a simple, lightweight (< 1KB minified + gzipped) jQuery pl
 
 The plugin should work with all browsers that support the `text-shadow` property: Firefox 3.1+, Chrome 2+, Opera 9.5+ (untested), Safari 1.1+ (untested), IE9+. 
 
+## Demo
+
+To view the plugin in action see http://www.alexpeattie.com/projects/animate-textshadow/
+
 ## Usage
 
 The plugin extends the `.animate` method to take a `textShadow` property.
 
-    $("#text").animate({textShadow: "#000 1px 2px 3px;"})
-    
+```javascript
+$("#text").animate({textShadow: "#000 1px 2px 3px"})
+```
+ 
 The textShadow property is made up of a color, and 3 absolute lengths:
 
 * `right` - governs how far to the right the shadow is offset. A negative value offsets the shadow to the left.
