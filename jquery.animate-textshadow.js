@@ -1,7 +1,7 @@
 /*!
  * Text shadow animation jQuery-plugin
  * http://alexpeattie.com/projects/text-shadow-animation
- * Copyright 2010 Alex Peattie <alexpeattie@gmail.com>
+ * Copyright 2011 Alex Peattie <alexpeattie@gmail.com>
  * Contributor: Edwin Martin <edwin@bitstorm.org>
  * Released under the MIT and GPL licenses.
  */
@@ -10,9 +10,8 @@ jQuery(function($) {
 	/**
 	 * Check whether the browser supports RGBA color mode.
 	 *
-	 * @author Mehdi Kabab <http://pioupioum.fr>
-	 * @type Boolean
-	 * @return True if the browser support RGBA. False otherwise.
+	 * Author Mehdi Kabab <http://pioupioum.fr>
+	 * @return {boolean} True if the browser support RGBA. False otherwise.
 	 */
 	function isRGBACapable() {
 		var $script = $('script:first'),
@@ -31,7 +30,7 @@ jQuery(function($) {
 		return result;
 	}
 
-	$.extend($, {
+	$.extend(true, $, {
 		support: {
 			'rgba': isRGBACapable()
 		}
@@ -43,10 +42,10 @@ jQuery(function($) {
 	$.fx.step['textShadow'] = function(fx) {
 		if (!fx.init) {
 			//We have to pass the font size to the parseShadow method, to allow the use of em units
-			var fontSize = $(fx.elem).css('fontSize');
+			var fontSize = $(fx.elem).get(0).style['fontSize'] || $(fx.elem).css('fontSize')
 
-			fx.begin = parseShadow($(fx.elem).css('textShadow'), fontSize);
-			fx.end = $.extend({}, fx.begin, parseShadow(fx.options.curAnim.textShadow, fontSize));
+			fx.begin = parseShadow($(fx.elem).get(0).style['textShadow'] || $(fx.elem).css('textShadow'), fontSize);
+			fx.end = $.extend({}, fx.begin, parseShadow(fx.end, fontSize));
 			fx.init = true;
 		}
 		fx.elem.style.textShadow = calculateShadow(fx.begin, fx.end, fx.pos);
@@ -98,7 +97,7 @@ jQuery(function($) {
 			color = [parseInt(match[1]), parseInt(match[2]), parseInt(match[3]), 1];
 
 			// Match rgba(n, n, n, n)
-		} else if (match = /rgba\(\s*([0-9]{1,3})\s*,\s*([0-9]{1,3})\s*,\s*([0-9]{1,3})\s*,\s*([0-1]{1}?\.?[0-9]*)\s*\)/.exec(shadow)) {
+		} else if (match = /rgba\(\s*([0-9]{1,3})\s*,\s*([0-9]{1,3})\s*,\s*([0-9]{1,3})\s*,\s*([0-9\.]*)\s*\)/.exec(shadow)) {
 			color = [parseInt(match[1]), parseInt(match[2]), parseInt(match[3]),parseFloat(match[4])];
 
 			// No browser returns rgb(n%, n%, n%), so little reason to support this format.
