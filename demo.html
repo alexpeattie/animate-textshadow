@@ -6,6 +6,13 @@
 	<style>
 	html,body,div,p{margin:0;padding:0;}
 	body { margin: 2em; font-family: Arial,sans-serif; }
+	#glow, #slow, #blurry { font-size: 80px; }
+	#blurry, #glow { font-family: Arial Black, Arial, Helvetica, sans-serif; }
+	#subtle { font-family: Consolas, Courier, monospace; font-size: 40px; text-shadow: #ccc 3px 3px 3px; }
+	#glow { letter-spacing: 2px; text-shadow: #f00 0 0 0; color: #cc2c2c; }
+	#slow { font-family: Arial, Helvetica, sans-serif; letter-spacing: 2px; text-shadow: #259 5px 5px 5px; color: #49b; }
+	#blurry { font-size: 80px; letter-spacing: -3px; text-shadow: #aaa 0 0 10px; color: transparent; }
+	#button { position: relative; cursor: pointer; color: #3a3; font-family: Gill Sans Ultra Bold; font-size: 50px; text-shadow: #141 5px 5px 0; }
 	</style>
 </head>
 
@@ -14,55 +21,60 @@
 	<h1>animate-textshadow Demos</h1>
 	
 	<div class="demos">
-		<div class="left"><p><span id="first" style="font-family: Consolas, Courier, monospace; font-size: 40px; text-shadow: #ccc 3px 3px 3px;">Subtle hover</span></p></div>
-		<div class="right"><pre><code>$("#subtle").hover(function() { 
-		&nbsp;&nbsp;$(this).animate({textShadow: "#aaa 6px 6px 6px"});
+	
+		<p><span id="subtle">Subtle hover</span></p>
+		
+		<pre><code>$("#subtle").hover(function() { 
+		  $(this).animate({textShadow: "#aaa 6px 6px 6px"});
 		}, function() { 
-		&nbsp;&nbsp;$(this).animate({textShadow: "#ccc 3px 3px 3px"});
-		});</code></pre></div>
-		<div class="clearfix"></div>
-		<div class="left"><p><span id="second" style="font-family: Arial Black, sans-serif; font-size: 80px; letter-spacing: 2px; text-shadow: #f00 0 0 0; color: #cc2c2c;">Glow</span></p></div>
-		<div class="right"><pre><code>$("#glow").hover(function() { 
-		&nbsp;&nbsp;$(this).animate({textShadow: "#f00 0 0 15px"});
+		  $(this).animate({textShadow: "#ccc 3px 3px 3px"});
+		});</code></pre>
+		
+		<p><span id="glow">Glow</span></p>
+		
+		<pre><code>$("#glow").hover(function() { 
+		  $(this).animate({textShadow: "#f00 0 0 15px"});
 		}, function() { 
-		&nbsp;&nbsp;$(this).animate({textShadow: "#f00 0 0 0"});
-		});</code></pre></div>
-		<div class="clearfix"></div>
-		<div class="left"><p><span id="third" style="font-family: Arial, Helvetica, sans-serif; font-size: 80px; letter-spacing: 2px; text-shadow: #259 5px 5px 5px; color: #49b;">Slow</span></p></div>
-		<div class="right"><pre><code>$("#slow").hover(function() { 
-		&nbsp;&nbsp;$(this).animate({textShadow: "#000 -10px -10px 30px"}, 1000);
+		  $(this).animate({textShadow: "#f00 0 0 0"});
+		});</code></pre>
+		
+		<p><span id="slow">Slow</span></p></div>
+		
+		<pre><code>$("#slow").hover(function() { 
+		  $(this).animate({textShadow: "#000 -10px -10px 30px"}, 1000);
 		}, function() { 
-		&nbsp;&nbsp;$(this).animate({textShadow: "#259 5px 5px 5px"}, 1000);
-		});</code></pre></div>
-		<div class="clearfix"></div>
-		<div class="left"><p><span id="fourth" style="font-family: Arial Black, Arial, Helvetica, sans-serif; font-size: 80px; letter-spacing: -3px; text-shadow: #aaa 0 0 10px; color: transparent;">Blurry</span></p></div>
-		<div class="right">
+		  $(this).animate({textShadow: "#259 5px 5px 5px"}, 1000);
+		});</code></pre>
+		
+		<p><span id="blurry">Blurry</span></p>
+		
 		<p>Text's color set to <code>transparent</code></p>
+		
 		<pre><code>$("#blurry").hover(function() { 
-		&nbsp;&nbsp;$(this).animate({textShadow: "#aaa 0 0 0"});
+		  $(this).animate({textShadow: "#aaa 0 0 0"});
 		}, function() { 
-		&nbsp;&nbsp;$(this).animate({textShadow: "#aaa 0 0 10px"});
-		});</code></pre></div>
-		<div class="clearfix"></div>
-		<div class="left"><p><span id="fifth" style="position: relative; cursor: pointer; color: #3a3; font-family: Gill Sans Ultra Bold; font-size: 50px; text-shadow: #141 5px 5px 0;">Text button</span></p></div>
-		<div class="right"><pre><code>$("#button").mousedown(function() { 
-		&nbsp;&nbsp;$(this).animate({top: "3px", left: "3px", textShadow: "#141 2px 2px 0"}, 100); 
+		  $(this).animate({textShadow: "#aaa 0 0 10px"});
+		});</code></pre>
+		
+		<p><span id="button">Text button</span></p>
+		
+		<pre><code>$("#button").mousedown(function() { 
+		  $(this).animate({top: "3px", left: "3px", textShadow: "#141 2px 2px 0"}, 100); 
 		}).mouseup(function() { 
-		&nbsp;&nbsp;$(this).animate({top: 0, left: 0, textShadow: "#141 5px 5px 0"}, 100); 
-		});</code></pre></div>
-		<div class="clearfix"></div>
+		  $(this).animate({top: 0, left: 0, textShadow: "#141 5px 5px 0"}, 100); 
+		});</code></pre>
+
 	</div>
 
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
-	<script src="jquery.animate-textshadow.js"></script>
+	<script src="libs/jquery-1.6.1.min.js"></script>
+	<script src="jquery.animate-textshadow.min.js"></script>
   <script type="text/javascript" charset="utf-8">
     $(document).ready(function() {
-      $("#first").hover(function() { $(this).animate({textShadow: "#aaa 6px 6px 6px"}); }, function() { $(this).animate({textShadow: "#ccc 3px 3px 3px"}); });
-      $("#second").hover(function() { $(this).animate({textShadow: "#f00 0 0 15px"}); }, function() { $(this).animate({textShadow: "#f00 0 0 0"}); });
-      $("#third").hover(function() { $(this).animate({textShadow: "#000 -10px -10px 30px"}, 1000); }, function() { $(this).animate({textShadow: "#259 5px 5px 5px"}, 1000); });
-      $("#fourth").hover(function() { $(this).animate({textShadow: "#aaa 0 0 0"}); }, function() { $(this).animate({textShadow: "#aaa 0 0 10px"}); });
-      $("#fifth").mousedown(function() { $(this).animate({top: "3px", left: "3px", textShadow: "#141 2px 2px 0"}, 100); }).mouseup(function() { $(this).animate({top: 0, left: 0, textShadow: "#141 5px 5px 0"}, 100); });
-      $(".text").click(function() { $(this).animate({textShadow: "#f0f 10px 10px 10px;"}); });
+      $("#subtle").hover(function() { $(this).animate({textShadow: "#aaa 6px 6px 6px"}); }, function() { $(this).animate({textShadow: "#ccc 3px 3px 3px"}); });
+      $("#glow").hover(function() { $(this).animate({textShadow: "#f00 0 0 15px"}); }, function() { $(this).animate({textShadow: "#f00 0 0 0"}); });
+      $("#slow").hover(function() { $(this).animate({textShadow: "#000 -10px -10px 30px"}, 1000); }, function() { $(this).animate({textShadow: "#259 5px 5px 5px"}, 1000); });
+      $("#blurry").hover(function() { $(this).animate({textShadow: "#aaa 0 0 0"}); }, function() { $(this).animate({textShadow: "#aaa 0 0 10px"}); });
+      $("#button").mousedown(function() { $(this).animate({top: "3px", left: "3px", textShadow: "#141 2px 2px 0"}, 100); }).mouseup(function() { $(this).animate({top: 0, left: 0, textShadow: "#141 5px 5px 0"}, 100); });
     });
   </script>
 	
