@@ -3,7 +3,7 @@
 
 animate-textshadow is a simple, lightweight (< 1KB minified + gzipped) jQuery plugin which lets you animate an element's `text-shadow` property, using jQuery's regular `.animate` method.
 
-The plugin should work with all browsers that support the `text-shadow` property: Firefox 3.1+, Chrome 2+, Opera 9.5+ (untested), Safari 1.1+ (untested), IE9+. 
+The plugin should work with all browsers that support the `text-shadow` property: Firefox 3.1+, Chrome 2+, Safari 1.1+ (untested), IE9+, limited Opera 9.5+ (see Known Issues below).
 
 ## Demo
 
@@ -61,8 +61,8 @@ animate-textshadow is licensed under the [MIT License](http://creativecommons.or
 
 ## Known issues/forthcoming features
 
+* A bug in Opera's implementation of `getComputedStyle` means it can't fetch an element's text-shadow. In Opera the plugin will just apply the new `text-shadow` value (no animation)
 * Only a single shadow is currently supported
 * All properties of text-shadow must be provided at the moment (contrary to the CSS spec)
-* Plugin doesn't work if text-shadow is set to none
 * Future support for CSS3 units (e.g. rem, ex, ch)
 * Possible future support for IE through filters.

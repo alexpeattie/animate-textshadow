@@ -43,8 +43,13 @@ jQuery(function($) {
 		if (!fx.init) {
 			//We have to pass the font size to the parseShadow method, to allow the use of em units
 			var fontSize = $(fx.elem).get(0).style['fontSize'] || $(fx.elem).css('fontSize')
-
-			fx.begin = parseShadow($(fx.elem).get(0).style['textShadow'] || $(fx.elem).css('textShadow'), fontSize);
+			var beginShadow = $(fx.elem).get(0).style['textShadow'] || $(fx.elem).css('textShadow')
+			
+			//In cases where text-shadow is none, or is not returned by browser (e.g. current versions of Opera)
+			//then set the beginning and ending shadow to be equal, so no animation
+			if(beginShadow == ('' || 'none')) { beginShadow = fx.end }
+			
+			fx.begin = parseShadow(beginShadow, fontSize);
 			fx.end = $.extend({}, fx.begin, parseShadow(fx.end, fontSize));
 			fx.init = true;
 		}
