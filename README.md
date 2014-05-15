@@ -29,7 +29,7 @@ The color can be in hex or RGB, the lengths can be in px, pt or em.
 
 ## Requirements
 
-[jQuery](http://jquery.com/) 1.4+
+[jQuery](http://jquery.com/) 2.1+
 
 ## Credits
 

@@ -40,7 +40,7 @@ jQuery(function($) {
 
 	// Extend the animate-function
 	$.fx.step['textShadow'] = function(fx) {
-		if (!fx.init) {
+		if (!fx.hasOwnProperty('init')) {
 			//We have to pass the font size to the parseShadow method, to allow the use of em units
 			var fontSize = $(fx.elem).get(0).style['fontSize'] || $(fx.elem).css('fontSize')
 			var beginShadow = $(fx.elem).get(0).style['textShadow'] || $(fx.elem).css('textShadow')
@@ -48,12 +48,12 @@ jQuery(function($) {
 			//In cases where text-shadow is none, or is not returned by browser (e.g. current versions of Opera)
 			//then set the beginning and ending shadow to be equal, so no animation
 			if(beginShadow == ('' || 'none')) { beginShadow = fx.end }
-			
+
 			fx.begin = parseShadow(beginShadow, fontSize);
-			fx.end = $.extend({}, fx.begin, parseShadow(fx.end, fontSize));
+			fx.endTemp = $.extend({}, fx.begin, parseShadow(fx.end, fontSize));
 			fx.init = true;
 		}
-		fx.elem.style.textShadow = calculateShadow(fx.begin, fx.end, fx.pos);
+		fx.elem.style.textShadow = calculateShadow(fx.begin, fx.endTemp, fx.pos);
 	}
 
 
