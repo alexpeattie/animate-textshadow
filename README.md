@@ -1,4 +1,8 @@
 #animate-textshadow
+
+<blockquote><h4>Update 2016: This library is no longer recommended for use in production - <a href='alexpeattie.com/blog/retiring-animate-textshadow-floating-feedback#animate-textshadowjs'>see here</a></h4></blockquote>
+
+
 ## A lightweight jQuery plugin to animate text shadows
 
 animate-textshadow is a simple, lightweight (< 1KB minified + gzipped) jQuery plugin which lets you animate an element's `text-shadow` property, using jQuery's regular `.animate` method.
