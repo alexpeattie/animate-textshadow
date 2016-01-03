@@ -40,19 +40,35 @@ jQuery(function($) {
 
 	// Extend the animate-function
 	$.fx.step['textShadow'] = function(fx) {
-		if (!fx.init) {
-			//We have to pass the font size to the parseShadow method, to allow the use of em units
-			var fontSize = $(fx.elem).get(0).style['fontSize'] || $(fx.elem).css('fontSize')
-			var beginShadow = $(fx.elem).get(0).style['textShadow'] || $(fx.elem).css('textShadow')
+		// We have initialized shadow values
+		if (!fx.hasOwnProperty('init')) {
+			// We have to pass the font size to the parseShadow method, to allow the use of em units
+			var fontSize = $(fx.elem).get(0).style['fontSize'] || $(fx.elem).css('fontSize');
+			var beginShadow = $(fx.elem).get(0).style['textShadow'] || $(fx.elem).css('textShadow');
 			
-			//In cases where text-shadow is none, or is not returned by browser (e.g. current versions of Opera)
-			//then set the beginning and ending shadow to be equal, so no animation
-			if(beginShadow == ('' || 'none')) { beginShadow = fx.end }
+			// In cases where text-shadow is none, or is not returned by browser, then set init to false
+			if(beginShadow == '' || beginShadow == 'none') {
+				fx.init = false;
+				return;
+			}
 			
 			fx.begin = parseShadow(beginShadow, fontSize);
+			
+			// In case we can't calculate beginning shadow (possibly unknown style format) then set init to false
+			if(fx.begin === false) {
+				fx.init = false;
+				return;
+			}
+			
 			fx.end = $.extend({}, fx.begin, parseShadow(fx.end, fontSize));
 			fx.init = true;
 		}
+		
+		// Flag to skip animation
+		if (fx.init === false) {
+			return;
+		}
+		
 		fx.elem.style.textShadow = calculateShadow(fx.begin, fx.end, fx.pos);
 	}
 
@@ -106,7 +122,12 @@ jQuery(function($) {
 			color = [parseInt(match[1]), parseInt(match[2]), parseInt(match[3]),parseFloat(match[4])];
 
 			// No browser returns rgb(n%, n%, n%), so little reason to support this format.
+		
+			// But we can get unknown format, in which case we return false indicating problem
+		} else {
+			return false;
 		}
+
 
 		// Remove the color value from the string for the next round of parsing
 		lengths = shadow.replace(match[0], '');
@@ -117,11 +138,15 @@ jQuery(function($) {
 			// Rough and ready em/pt > px conversion
 			valpx = match.slice(1).map(function(v) {
 				var unit = v.match(/em|pt/);
-				if(unit == "em") return parseFloat(v) * parseInt(fontSize);
-				if(unit == "pt") return parseInt(v)/72*96;
+				if (unit == "em") return parseFloat(v) * parseInt(fontSize);
+				if (unit == "pt") return parseInt(v)/72*96;
 				return parseInt(v);
 			});
 			parsedShadow = {right: valpx[0], bottom: valpx[1], blur: valpx[2]};
+			
+			// In case we can't parse other values from style
+		} else {
+			return false;
 		}
 
 		parsedShadow.color = color;
